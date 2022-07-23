@@ -1,0 +1,4 @@
+**/__pycache__
+*.ipynb
+*test.py
+config.py

@@ -1,0 +1,1 @@
+{"tag":"figure","children":[{"tag":"div","attrs":{"class":"figure_wrapper"},"children":[{"tag":"img","attrs":{"src":"$src","title":"","style":""}}]},{"tag":"figcaption","attrs":{"dir":"auto"},"children":["$caption"]}]}
