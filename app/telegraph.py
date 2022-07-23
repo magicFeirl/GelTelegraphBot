@@ -3,9 +3,9 @@ import json
 from typing import Dict, List, Optional, Union
 
 from aiohttp import ClientSession
+from tqdm.asyncio import tqdm_asyncio
 
 from app.models import get_model_formatter
-
 
 class TelegraphImage(object):
     def __init__(self, title, src) -> None:
@@ -54,7 +54,7 @@ class Telegraph(object):
 
     async def create_account(self, short_name, author_name='', author_url=''):
         if self.access_token:
-            print('Use existed token')
+            # print('Use existed token')
             return
 
         api = self.api.create_account
@@ -134,7 +134,7 @@ class Telegraph(object):
             elif isinstance(file_or_url, bytes):
                 file = file_or_url
             else:
-                raise ValueError('File argument must be bytes or string')
+                raise ValueError('File argument\'s type must be bytes or string')
 
             if (len(file) // 1024 // 1024) >= 5:
                 return
@@ -147,7 +147,7 @@ class Telegraph(object):
             if data:
                 try:
                     src = data[0]['src']
-                    print('uploaded:', src)
+                    # print('uploaded:', src)
                 except Exception as e:
                     print('upload file falied', e, data)
             else:
@@ -161,7 +161,7 @@ class Telegraph(object):
 
             tasks.append(task)
 
-        results = list(filter(lambda src: src, await asyncio.gather(*tasks)))
+        results = list(filter(lambda src: src, await tqdm_asyncio.gather(*tasks, desc='uploaded count')))
 
         return results
 
