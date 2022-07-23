@@ -35,7 +35,7 @@ async def main():
         # latest_page = None
 
         async for posts, page in search_posts(tags, begin, end):
-            print(f'crawing page: {page + 1}/{end}')
+            print(f'crawing page: {page + 1}')
 
             file_urls = [item.file_url for item in posts]
             content = [Image(src=url) for url in await ph.upload_files(file_urls)]
